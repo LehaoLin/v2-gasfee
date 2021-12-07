@@ -32,7 +32,7 @@ function sleep (time) {
         }else{
             var data_pre = [current]
         }
-        console.log(data_pre)
+        console.log(current)
         fs.writeFileSync(file_path, JSON.stringify(data_pre))
 
         await browser.close();
