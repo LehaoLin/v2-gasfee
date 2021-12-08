@@ -18,9 +18,9 @@ function sleep (time) {
         let current = {}
         let now = dayjs()
         current.time = now.unix()
-        
-        let target = await page.$x(`//*[@id="__next"]/div/div/div/div/main/div[2]/div[2]/div[1]/div/table/tbody/tr[6]/td[7]`)
     
+        let target = await page.$x(`//*[@id="__next"]/div/div/div/div/main/div[2]/div[2]/div[1]/div/table/tbody/tr[6]/td[7]`)
+
         current.price = await page.evaluate(el => el.textContent, target[0])
 
         var file_path = path.join(__dirname, 'data.json'); 
