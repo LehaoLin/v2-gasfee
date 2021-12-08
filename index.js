@@ -13,7 +13,7 @@ function sleep (time) {
     while (1){
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
-        await page.goto('https://crypto.com/defi/dashboard/gas-fees');
+        await page.goto('https://crypto.com/defi/dashboard/gas-fees', { timeout: 0 });
     
         let current = {}
         let now = dayjs()
@@ -23,7 +23,7 @@ function sleep (time) {
     
         current.price = await page.evaluate(el => el.textContent, target[0])
 
-        var file_path = path.join(__dirname, 'data.txt'); 
+        var file_path = path.join(__dirname, 'data.json'); 
 
         if (fs.existsSync(file_path)){
             var data_pre = JSON.parse(fs.readFileSync(file_path))
