@@ -13,8 +13,8 @@ function sleep (time) {
     while (1){
 
         try{
-            const browser = await puppeteer.launch();
-            const page = await browser.newPage();
+            var browser = await puppeteer.launch();
+            var page = await browser.newPage();
             await page.goto('https://crypto.com/defi/dashboard/gas-fees', { timeout: 0 });
         
             let current = {}
