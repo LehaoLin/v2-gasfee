@@ -39,7 +39,7 @@ function sleep (time) {
     
             await browser.close();
             // await sleep(60000);
-            await sleep(6000);
+            await sleep(30000);
         } catch (err){
             console.log(err)
             continue

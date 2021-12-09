@@ -1,0 +1,90 @@
+<body>
+    <div id='main' style="height: 100%;"></div>
+</body>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.6/dayjs.min.js"></script>
+<script>
+
+
+axios.post('/data', {
+  })
+  .then(function (response) {
+    console.log(response.data.data);
+
+var chartDom = document.getElementById('main');
+var myChart = echarts.init(chartDom);
+var option;
+
+data = response.data.data
+
+var new_data = []
+data.forEach(element => {
+    new_data.push([element.time * 1000, element.price.split('$')[1]])
+});
+
+    option = {
+  tooltip: {
+    trigger: 'axis',
+    position: function (pt) {
+      return [pt[0], '20%'];
+    }
+  },
+  title: {
+    left: 'center',
+    text: 'V2 Gas Fee'
+  },
+  toolbox: {
+    feature: {
+      dataZoom: {
+        yAxisIndex: 'none'
+      },
+      restore: {},
+      saveAsImage: {}
+    }
+  },
+  xAxis: {
+    type: 'time',
+    boundaryGap: false
+  },
+  yAxis: {
+    type: 'value',
+    boundaryGap: [0, '100%']
+  },
+  dataZoom: [
+    {
+      type: 'inside',
+      start: 0,
+      end: 100
+    },
+    {
+      start: 0,
+      end: 100
+    }
+  ],
+  series: [
+    {
+      name: 'Gas Fee',
+      type: 'line',
+      smooth: true,
+      symbol: 'none',
+      areaStyle: {},
+      data: new_data
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+
+
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+
+
+
+</script>
